@@ -9,7 +9,7 @@
 			"name": "Sean Capaloff-Jones",
 			"email": "sean@shooflysolutions.com",
 			"role": "Creator"
-	],
+	}],
 	"support": {
 		"email": "sean@shooflysolutions.com",
 		"issues": "https://github.com/smcjones/doctrine-multi-schema-bundle/issues"
