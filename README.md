@@ -1,8 +1,8 @@
 Enables Multiple Schemas for MySQL on Doctrine
 
-*I created this bundle to fulfill a need for one of my projects. It is not thoroughly tested for all use cases, and will be regularly updated. 
+*I created this bundle to fulfill a need for one of my projects. It is not thoroughly tested for all use cases, and will be regularly updated.*
 
-If you find this useful but spot a bug, I welcome PRs.*
+*If you find this useful but spot a bug, I welcome PRs.*
 
 ## The Premise
 
@@ -14,6 +14,12 @@ nature to a PostgreSQL schema, and the term `DATABASE` can be used interchangeab
 This makes it very difficult to handle MySQL layouts that use more than one schema - often a reality in inherited code.
 
 If your personal use case is transferring an existing project with multiple schemas into a Symfony project, and you'd like to use Doctrine, then this bundle seeks to make that possible.
+
+## Installation
+
+In your Symfony project, install with
+
+    composer require shoofly/doctrine-multi-schema-bundle
 
 ## Configuraiton
 
