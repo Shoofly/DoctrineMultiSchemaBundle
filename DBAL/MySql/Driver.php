@@ -28,7 +28,7 @@ use PDOException;
 /**
  * PDO MySql multi-schema driver.
  *
- * @since 2.0
+ * @since 0.1
  */
 class Driver extends PDODriver
 {
