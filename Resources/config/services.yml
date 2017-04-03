@@ -1,0 +1,5 @@
+services:
+  shoofly_doctrine_multi_schema.platform:
+      class: Shoofly\DoctrineMultiSchemaBundle\DBAL\MySql\Platform
+      arguments: ["%shoofly.doctrine_multi_schema.schemas%"]
+
