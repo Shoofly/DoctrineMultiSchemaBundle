@@ -4,5 +4,5 @@ namespace Shoofly\DoctrineMultiSchemaBundle\DBAL\MySql;
 
 interface MultiSchemaInterface
 {
-    function setSchemas();
+    function setSchemas($schemas);
 }
