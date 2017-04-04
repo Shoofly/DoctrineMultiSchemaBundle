@@ -41,4 +41,45 @@ class Driver extends PDODriver
     {
         return 'mysql_multi_schema';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createDatabasePlatformForVersion($version)
+    {
+        if ( ! preg_match('/^(?P<major>\d+)(?:\.(?P<minor>\d+)(?:\.(?P<patch>\d+))?)?/', $version, $versionParts) ) {
+            throw DBALException::invalidPlatformVersionSpecified(
+                $version,
+                '<major_version>.<minor_version>.<patch_version>'
+            
+                    );
+        
+        }
+
+        if (false !== stripos($version, 'mariadb')) {
+            return $this->getDatabasePlatform();
+        
+        }
+
+        $majorVersion = $versionParts['major'];
+        $minorVersion = isset($versionParts['minor']) ? $versionParts['minor'] : 0;
+        $patchVersion = isset($versionParts['patch']) ? $versionParts['patch'] : 0;
+        $version      = $majorVersion . '.' . $minorVersion . '.' . $patchVersion;
+
+        if (version_compare($version, '5.7', '>=')) {
+            return new Platform57();
+        
+        }
+
+        return $this->getDatabasePlatform();
+    
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getDatabasePlatform()
+    {
+        return new Platform();
+    }
 }
