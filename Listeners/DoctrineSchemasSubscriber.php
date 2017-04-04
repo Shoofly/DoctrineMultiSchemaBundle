@@ -12,7 +12,7 @@ use Shoofly\DoctrineMultiSchema\DBAL\MySql\MultiSchemaInterface;
  * @author Sean Capaloff-Jones <scapaloff@cs.columbia.edu>
  * @since 0.1.2
  */
-class DoctrineSchemasSubscriber implements EventsSubscriber
+class DoctrineSchemasSubscriber implements EventSubscriber
 {
     public function __construct($schemas)
     {
