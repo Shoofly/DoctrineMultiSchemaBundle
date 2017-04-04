@@ -98,7 +98,7 @@ trait PlatformTrait
             $database = $tableParts[1];
         }
         $table = $this->quoteStringLiteral($table);
-        $databases = $this->quoteStringLiteral($database);
+        $database = $this->quoteStringLiteral($database);
 
         return "SELECT TABLE_NAME AS `Table`, NON_UNIQUE AS Non_Unique, INDEX_NAME AS Key_name, ".
                "SEQ_IN_INDEX AS Seq_in_index, COLUMN_NAME AS Column_Name, COLLATION AS Collation, ".
