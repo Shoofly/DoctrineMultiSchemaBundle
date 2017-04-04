@@ -29,12 +29,11 @@ Add to your Symfony AppKernel.php:
     
 ## Configuraiton
 
-**IMPORTANT:** Remove your driver and platform, and replace it with these two parameters. 
+**IMPORTANT:** Remove your driver and replace it with this driver class.
 
     doctrine:
         dbal:
             driver_class: 'Shoofly\DoctrineMultiSchemaBundle\DBAL\MySQL\Driver'
-            platform_service: "shoofly_doctrine_multi_schema.platform"
 
 
 Next, list the schemas you want to include in your ORM:
