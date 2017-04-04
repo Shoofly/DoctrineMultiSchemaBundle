@@ -33,7 +33,5 @@ class ShooflyDoctrineMultiSchemaExtension extends Extension
             MySql\Driver::class,
             MySql\SchemaManager::class 
         ));
-
-        $this->loadDefinition();        
     }
 }
