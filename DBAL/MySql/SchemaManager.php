@@ -73,7 +73,6 @@ class SchemaManager extends MySqlSchemaManager
      */
     public function listTableDetails($tableName)
     {
-        var_dump($tableName);
         $columns = $this->listTableColumns($tableName);
         $foreignKeys = array();
         if ($this->_platform->supportsForeignKeyConstraints()) {
