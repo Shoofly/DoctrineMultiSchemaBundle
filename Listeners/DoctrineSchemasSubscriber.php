@@ -1,15 +1,17 @@
 <?php
-/** 
- * Prefixes a database to a Doctrine command.
- * This is essential when doing migrations from MICE
- * multi-tenancy design.
- */
+
 namespace Shoofly\DoctrineMultiSchemaBundle\Listeners;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Event\ConnectionEventArgs;
 use Shoofly\DoctrineMultiSchema\DBAL\MySql\MultiSchemaInterface;
 
+/**
+ * Injects available schemas into a driver entity through the postConnect event.
+ *
+ * @author Sean Capaloff-Jones <scapaloff@cs.columbia.edu>
+ * @since 0.1.2
+ */
 class DoctrineSchemasSubscriber implements EventsSubscriber
 {
     public function __construct($schemas)
