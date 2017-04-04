@@ -30,17 +30,12 @@ use PDOException;
  *
  * @since 0.1
  */
-class Driver extends PDODriver
+class Driver extends PDODriver 
 {
     public function getSchemaManager(\Doctrine\DBAL\Connection $conn)
     {
         return new SchemaManager($conn);
     } 
-
-    public function getName()
-    {
-        return 'mysql_multi_schema';
-    }
 
     /**
      * {@inheritdoc}

@@ -29,7 +29,7 @@ trait PlatformTrait
 {
     protected $schemas;
 
-    public function __construct($schemas)
+    public function setSchemas($schemas)
     {
         $this->schemas = $schemas;
     }
