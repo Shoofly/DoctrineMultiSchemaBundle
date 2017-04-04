@@ -20,7 +20,13 @@ If your personal use case is transferring an existing project with multiple sche
 In your Symfony project, install with
 
     composer require shoofly/doctrine-multi-schema-bundle
+    
+Add to your Symfony AppKernel.php:
 
+    $bundles = [
+        new Shoofly\DoctrineMultiSchemaBundle\ShooflyDoctrineMultiSchemaBundle(),
+    ];
+    
 ## Configuraiton
 
 **IMPORTANT:** Remove your driver and platform, and replace it with these two parameters. 
