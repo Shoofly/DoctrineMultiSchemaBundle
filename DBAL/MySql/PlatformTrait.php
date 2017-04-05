@@ -18,6 +18,7 @@
  */
 
 namespace Shoofly\DoctrineMultiSchemaBundle\DBAL\MySql;
+use Doctrine\DBAL\Schema\TableDiff;
 
 /**
  * This extends the basic MySqlPlatform to provide multi-schema capabilities.
@@ -131,6 +132,35 @@ trait PlatformTrait
         $databases = implode(',', array_map([$this, 'quoteStringLiteral'], $this->schemas));
         
         return "SELECT * FROM information_schema.VIEWS WHERE TABLE_SCHEMA IN (" . $databases . ")";
+    }
+
+    /**
+     * @param \Doctrine\DBAL\Schema\TableDiff $diff
+     *
+     * @return array
+     */
+    protected function getPreAlterTableIndexForeignKeySQL(TableDiff $diff)
+    {
+        $tableName = $diff->getName($this)->getQuotedName($this);
+
+        $sql = array();
+        if ($this->supportsForeignKeyConstraints()) {
+            foreach ($diff->removedForeignKeys as $foreignKey) {
+                $sql[] = $this->getDropForeignKeySQL($foreignKey, $tableName);
+            }
+            foreach ($diff->changedForeignKeys as $foreignKey) {
+                $sql[] = $this->getDropForeignKeySQL($foreignKey, $tableName);
+            }
+        }
+
+        foreach ($diff->removedIndexes as $index) {
+            $sql[] = $this->getDropIndexSQL($index, $tableName);
+        }
+        foreach ($diff->changedIndexes as $index) {
+            $sql[] = $this->getDropIndexSQL($index, $tableName);
+        }
+
+        return $sql;
     }
 
 }
