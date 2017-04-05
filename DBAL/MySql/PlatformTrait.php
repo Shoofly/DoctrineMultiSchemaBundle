@@ -71,7 +71,7 @@ trait PlatformTrait
         return "SELECT COLUMN_NAME AS Field, COLUMN_TYPE AS Type, IS_NULLABLE AS `Null`, ".
                "COLUMN_KEY AS `Key`, COLUMN_DEFAULT AS `Default`, EXTRA AS Extra, COLUMN_COMMENT AS Comment, " .
                "CHARACTER_SET_NAME AS CharacterSet, COLLATION_NAME AS Collation ".
-               "FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = " . $schema . " AND TABLE_NAME = " . $table;
+               "FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = " . $schema . " AND TABLE_NAME = " . $table;
     }
 
     /**
@@ -95,7 +95,7 @@ trait PlatformTrait
         if (1 === count($tableParts)) {
             $schema = $currentDatabase;
         } else {
-            list($table, $schema) = $tableParts;
+            list($schema, $table) = $tableParts;
         }
         $table = $this->quoteStringLiteral($table);
         $schema = $this->quoteStringLiteral($schema);
@@ -104,7 +104,7 @@ trait PlatformTrait
                "SEQ_IN_INDEX AS Seq_in_index, COLUMN_NAME AS Column_Name, COLLATION AS Collation, ".
                "CARDINALITY AS Cardinality, SUB_PART AS Sub_Part, PACKED AS Packed, " .
                "NULLABLE AS `Null`, INDEX_TYPE AS Index_Type, COMMENT AS Comment " .
-               "FROM information_schema.STATISTICS WHERE TABLE_NAME = " . $table . " AND TABLE_SCHEMA = " . $schema;
+               "FROM INFORMATION_SCHEMA.STATISTICS WHERE TABLE_NAME = " . $table . " AND TABLE_SCHEMA = " . $schema;
 
     }
     
