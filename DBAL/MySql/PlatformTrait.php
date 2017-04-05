@@ -56,8 +56,8 @@ trait PlatformTrait
     public function getListTableColumnsSQL($table, $database = null)
     {
 
-        if (2 == count($tableArray = explode('.', $table))) {
-            list($schema, $table) = $tableArray;
+        if (2 == count($tableParts  = explode('.', $table))) {
+            list($schema, $table) = $tableParts;
         } else {
             $schema = $database;
         }
@@ -92,19 +92,18 @@ trait PlatformTrait
         // get the schema (should always be prepended)
         $tableParts = explode('.', $table);
         if (1 === count($tableParts)) {
-            $database = $currentDatabase;
+            $schema = $currentDatabase;
         } else {
-            $table = $tableParts[0];
-            $database = $tableParts[1];
+            list($table, $schema) = $tableParts;
         }
         $table = $this->quoteStringLiteral($table);
-        $database = $this->quoteStringLiteral($database);
+        $schema = $this->quoteStringLiteral($schema);
 
         return "SELECT TABLE_NAME AS `Table`, NON_UNIQUE AS Non_Unique, INDEX_NAME AS Key_name, ".
                "SEQ_IN_INDEX AS Seq_in_index, COLUMN_NAME AS Column_Name, COLLATION AS Collation, ".
                "CARDINALITY AS Cardinality, SUB_PART AS Sub_Part, PACKED AS Packed, " .
                "NULLABLE AS `Null`, INDEX_TYPE AS Index_Type, COMMENT AS Comment " .
-               "FROM information_schema.STATISTICS WHERE TABLE_NAME = " . $table . " AND TABLE_SCHEMA = " . $database;
+               "FROM information_schema.STATISTICS WHERE TABLE_NAME = " . $table . " AND TABLE_SCHEMA = " . $schema;
 
     }
     
