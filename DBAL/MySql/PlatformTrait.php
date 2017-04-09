@@ -163,4 +163,36 @@ trait PlatformTrait
         return $sql;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getListTableForeignKeysSQL($table, $database = null)
+    {
+        if (2 == count($tableParts  = explode('.', $table))) {
+            list($schema, $table) = $tableParts;
+        
+        } else {
+            $schema = $database;
+        
+        }
+
+        $table = $this->quoteStringLiteral($table);
+
+        $schema = $this->quoteStringLiteral($schema);
+
+        $sql = "SELECT DISTINCT k.`CONSTRAINT_NAME`, k.`COLUMN_NAME`, ".
+           "k.`REFERENCED_TABLE_NAME`, ".
+           "k.`REFERENCED_COLUMN_NAME` /*!50116 , c.update_rule, c.delete_rule */ ".
+           "FROM information_schema.key_column_usage k /*!50116 ".
+           "INNER JOIN information_schema.referential_constraints c ON ".
+           "  c.constraint_name = k.constraint_name AND ".
+           "  c.table_name = $table */ WHERE k.table_name = $table".
+           " AND k.table_schema = $schema ".
+           "/*!50116 AND c.constraint_schema = $schema  */".
+           " AND k.`REFERENCED_COLUMN_NAME` is not NULL";
+
+        return $sql;
+    
+    }
 }
