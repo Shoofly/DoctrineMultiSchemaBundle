@@ -195,4 +195,13 @@ trait PlatformTrait
         return $sql;
     
     }
+
+    /**
+     * @inheritdoc
+     * @source https://coderwall.com/p/staybw/workaround-for-1701-cannot-truncate-a-table-referenced-in-a-foreign-key-constraint-using-doctrine-fixtures-load-purge-with-truncate
+     */
+    public function getTruncateTableSQL($tableName, $cascade = false)
+    {
+        return sprintf('SET foreign_key_checks = 0; TRUNCATE %s;SET foreign_key_checks = 1;', $tableName);
+    }
 }
