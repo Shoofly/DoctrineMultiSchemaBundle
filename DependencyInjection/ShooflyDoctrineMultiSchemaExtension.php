@@ -28,7 +28,7 @@ class ShooflyDoctrineMultiSchemaExtension extends Extension
 
         $container->setParameter( 'shoofly.doctrine_multi_schema.schemas', $config[ 'schemas' ] );
 
-        $this->addClassesToCompile(array(
+        $this->addAnnotatedClassesToCompile(array(
             MySql\Platform::class,
             MySql\Driver::class,
             MySql\SchemaManager::class 
